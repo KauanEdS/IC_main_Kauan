@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'db_mysite',
         'USER': 'root',
         'PASSWORD': 'admin123',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   
         'PORT': '3306',
     }
 }

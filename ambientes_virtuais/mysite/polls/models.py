@@ -10,21 +10,21 @@ class Choice(models.Model):
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
-    from django.db import models
-
 class Cliente(models.Model):
-    cpf = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    cpf = models.CharField(max_length=14, unique=True)  
     nome = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
-    telefone = models.CharField(max_length=12)
+    cnpj = models.CharField(max_length=14, default='00000000000000')  
 
     def __str__(self):
         return self.nome
 
 class Login(models.Model):
-    id_cpf = models.OneToOneField(Cliente, on_delete=models.CASCADE)
-    nome = models.CharField(max_length=50, unique=True, null=True)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)  # Relacionamento com Cliente
+    email = models.EmailField(max_length=50, unique=True, null=False, default='default@example.com')  
     senha = models.CharField(max_length=50, null=True)
+    senha_confirmada = models.CharField(max_length=50, null=True)  # Campo para confirmar a senha
 
     def __str__(self):
-        return self.nome
+        return self.email
